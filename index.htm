@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="adminApp" ng-strict-di>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" name="viewport">
+<title>JavaScript structure</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="structure_chart">
+<h1 class="kl_title">
+Knowledge Structure
+<sup><a href="http://lib.csdn.net/" target="_blank">ref</a></sup>
+</h1>
+<div class="kl_spread">
+	<button onclick="loadData(this)">JavaScript</button>
+	<button onclick="loadData(this)">Angular</button>
+	<button onclick="loadData(this)">HTML5</button>
+	<button onclick="loadData(this)">jQuery</button>
+	<button onclick="loadData(this)">React</button>
+	<button onclick="loadData(this)">Weixin</button>
+	<button onclick="loadData(this)">Docker</button>
+	<button onclick="loadData(this)">Node</button>
+	<button onclick="loadData(this)">Git</button>
+	<button onclick="loadData(this)">Go</button>
+	<button onclick="loadData(this)">Architecture</button>
+	<button onclick="loadData(this)">PHP</button>
+	<button onclick="loadData(this)">Test</button>
+	<button onclick="loadData(this)">MySQL</button>
+	<button onclick="loadData(this)">Python</button>
+	<button onclick="loadData(this)">Algorithm</button>
+	<button onclick="loadData(this)">Virtual Reality</button>
+	<button onclick="loadData(this)">Machine Learning</button>
+	<button onclick="loadData(this)">React Native</button>
+</div>
+<div id="mapRow"></div>
+</div>
+<script type="text/javascript" src="d3.js" charset="utf-8"></script>
+<script type="text/javascript" src="loadmap.js"></script>
+<script type="text/javascript">loadData('JavaScript');</script>
+</body>
+</html>
