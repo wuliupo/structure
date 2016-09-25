@@ -1,0 +1,26 @@
+{
+  "name": "structure",
+  "version": "1.0.0",
+  "description": "Data comes from <http://lib.csdn.net/>, copyright [@CSDN](http://www.csdn.net/)",
+  "main": "crawler.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "superagent": "^2.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuliupo/structure.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wuliupo/structure/issues"
+  },
+  "homepage": "https://github.com/wuliupo/structure"
+}

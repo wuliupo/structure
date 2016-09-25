@@ -7,16 +7,16 @@ function loadData(obj){
         return;
     }
     window.struc[type] = {};
-    ajax(type + '/node.json', function(nodestr){
+    ajax('data/' + type + '/node.json', function(nodestr){
         window.struc[type].nodestr = nodestr;
-        ajax(type + '/link.json', function(linkstr){
+        ajax('data/' + type + '/link.json', function(linkstr){
             window.struc[type].linkstr = linkstr;
             loadMap(nodestr, linkstr);
-        });
-    });
+        }, true);
+    }, true);
 }
 
-function ajax(url, callback){
+function ajax(url, callback, isJSON){
     var xmlHttpRequest;
     if(window.ActiveXObject){
         xmlHttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
@@ -29,7 +29,7 @@ function ajax(url, callback){
 
     xmlHttpRequest.onreadystatechange = function(){
         if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
-            callback(JSON.parse(xmlHttpRequest.responseText));
+            callback(isJSON ? JSON.parse(xmlHttpRequest.responseText) : xmlHttpRequest.responseText);
         }
     };
     xmlHttpRequest.open("GET", url, true);
@@ -40,7 +40,7 @@ function loadMap(a, n) {
 
     var t = {
         width: 1140,
-        height: 940
+        height: 1400
     };
 
     var c = ["#1f77b4", "#ff7f0e", "#2ca02c", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]
