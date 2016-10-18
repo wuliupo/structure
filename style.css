@@ -10,5 +10,5 @@ svg .link{fill:none;stroke:#6ac6ff;opacity:.8;stroke-width:2}
 svg text.desc{fill:#000;font-family:fantasy;font-size:10px;font-weight:bolder}
 .structure_chart{position:relative;width:1140px;margin:15px auto;box-shadow:0 0 3px 2px #dfdfdf}
 .kl_title{padding:18px 20px;border-bottom:1px solid #bbb;background-color:#fff;font-size:18px;font-weight:700;line-height:19px;color:#666}
-.kl_spread{margin:-20px 0 20px;padding:4px;border:1px solid #eee;background-color:#fff;line-height:22px}
-.kl_spread button{margin-right:5px;padding:2px 5px;font-size:12px;vertical-align:middle;line-height:17px}
+.kl_spread{margin:-20px 0 20px;padding:4px 13px;border:1px solid #eee;background-color:#fff;line-height:22px}
+.kl_spread button{margin:2px 5px;padding:2px 5px;font-size:12px;vertical-align:middle;line-height:17px}
