@@ -1,8 +1,11 @@
-
 function loadData(obj){
     var type = (obj.innerHTML || obj).replace(/\s+/g, '').toLowerCase();
+    if (!type) {
+        return;
+    }
     window.struc = window.struc || {};
     if(window.struc[type]){
+        window.history.pushState(null, '', location.pathname + '?type=' + type);
         loadMap(window.struc[type].nodestr, window.struc[type].linkstr);
         return;
     }
@@ -11,6 +14,7 @@ function loadData(obj){
         window.struc[type].nodestr = nodestr;
         ajax('data/' + type + '/link.json', function(linkstr){
             window.struc[type].linkstr = linkstr;
+            window.history.pushState(null, '', location.pathname + '?type=' + type);
             loadMap(nodestr, linkstr);
         }, true);
     }, true);
@@ -140,7 +144,7 @@ function loadMap(a, n) {
       , p = f.enter().append("g").attr("class", function(t, e) {
         return 0 === e ? "node active" : "node"
     }).call(u.drag).on("click", function(t) {
-        d3.event.defaultPrevented || window.open(t.href)
+        d3.event.defaultPrevented || console.log('原站点关闭，取消链接跳转', t.href)
     });
     p.append("circle").attr({
         r: 29,
@@ -174,3 +178,20 @@ function loadMap(a, n) {
         u.alpha() < .01 ? clearInterval(g) : u.tick()
     }, 80);
 }
+
+var buttons = document.getElementById('buttons');
+buttons.addEventListener('click', function(e) {
+    var dom = e.target || {};
+    loadData(dom.innerText || dom.textContent);
+});
+ajax('list.txt', function(list){
+	var content = '';
+	list.split('\n').forEach(function(name){
+		if(name) {
+			content += '<button>' + name + '</button>'
+		}
+	});
+	buttons.innerHTML = content;
+    var type = location.search.replace(/.*[?&]type=(\w+).*/, '$1');
+	loadData(/^\w+$/.test(type) ? type : 'JavaScript');
+});

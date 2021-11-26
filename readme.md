@@ -2,7 +2,7 @@
 
 Data comes from <http://lib.csdn.net/>, copyright [@CSDN](http://www.csdn.net/)
 
-```
+```bash
 npm install
 node crawler
 ```

@@ -11,25 +11,12 @@
 <div class="structure_chart">
 <h1 class="kl_title">
 Knowledge Structure
-<sup><a href="http://lib.csdn.net/" target="_blank">ref</a></sup>
+<sup>ref: lib.csdn.net</sup>
 </h1>
 <div class="kl_spread" id="buttons">loading</div>
 <div id="mapRow"></div>
 </div>
-<script type="text/javascript" src="d3.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/d3/3.5.9/d3.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="loadmap.js"></script>
-<script type="text/javascript">
-var buttons = document.getElementById('buttons');
-ajax('list.txt', function(list){
-	var content = '';
-	list.split('\n').forEach(function(name){
-		if(name) {
-			content += '<button onclick="loadData(this)">' + name + '</button>'
-		}
-	});
-	buttons.innerHTML = content;
-	loadData('JavaScript');
-});
-</script>
 </body>
 </html>

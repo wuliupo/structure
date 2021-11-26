@@ -1,7 +1,21 @@
 ;(function(){
 'use strict';
 var fs = require('fs');
-var superagent = require('superagent');
+var https = require('https');
+
+function httpGet(url, callback) {
+	const index = url.indexOf('/', 8);
+	const hostname = url.substring(0, index);
+	const path = url.substring(index);
+	const req = https.request({ hostname, path, method: 'GET' }, res => {
+		let rawData = '';
+		res.on('data', chunk => rawData += chunk);
+		res.on('end', () => callback(rawData));
+	});
+	req.on('error', e => callback(null));
+	req.write(data);
+	req.end();
+}
 
 function getData(source, dir){
 	if(fs.existsSync(dir)){
@@ -12,12 +26,12 @@ function getData(source, dir){
 
 	console.log('[info] gettting ' + source);
 
-	superagent.get(source).end(function (error, response) {
-		if(error || response.statusCode !== 200 || !response.text){
+	httpGet.get(source, function (res) {
+		if(!res){
 			console.error('[ERR] download file error (' + source + '): ');
 		}else{
-			saveFile(response.text, 'node', dir);
-			saveFile(response.text, 'link', dir);
+			saveFile(res, 'node', dir);
+			saveFile(res, 'link', dir);
 		}
 	});
 }
@@ -53,6 +67,7 @@ fs.readFileSync('list.txt', 'utf-8').split('\n').forEach(function(name){
 	console.log('[info] starting ...' + name);
 	name = name.replace(/\s+/g, '').replace(/\+/g, 'plus').replace(/#/g, 'sharp').toLowerCase();
 
+	// api: http://lib.csdn.net/base/php/structure
 	getData('http://lib.csdn.net/base/' + name + '/structure', 'data/' + name);
 
 });
