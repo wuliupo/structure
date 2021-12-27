@@ -36,23 +36,25 @@
      * @returns 
      */
     function ajax( url, callback, isJSON ) {
-        var xmlHttpRequest;
+        var xhr;
         if ( window.ActiveXObject ) {
-            xmlHttpRequest = new ActiveXObject( "Microsoft.XMLHTTP" );
+            xhr = new ActiveXObject( "Microsoft.XMLHTTP" );
         } else if ( window.XMLHttpRequest ) {
-            xmlHttpRequest = new XMLHttpRequest();
+            xhr = new XMLHttpRequest();
         } else {
             console.error( 'Cannot init ajax' );
             return;
         }
 
-        xmlHttpRequest.onreadystatechange = function () {
-            if ( xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200 ) {
-                callback( isJSON ? JSON.parse( xmlHttpRequest.responseText ) : xmlHttpRequest.responseText );
+        xhr.onreadystatechange = function () {
+            if ( xhr.readyState == 4 && xhr.status == 200 ) {
+                callback( isJSON ? JSON.parse( xhr.responseText ) : xhr.responseText );
+            } else if (xhr.readyState === 4 && xhr.status !== 200) {
+                document.getElementById('mapRow').innerHTML = '数据加载错误';
             }
         };
-        xmlHttpRequest.open( "GET", url, true );
-        xmlHttpRequest.send( null );
+        xhr.open( "GET", url, true );
+        xhr.send( null );
     }
 
     /**
