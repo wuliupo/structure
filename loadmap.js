@@ -4,13 +4,29 @@
      */
     var DATA = {};
 
+    function covertName(type) {
+        return type && type.replace( /\s+/g, '' ).replace( /\+/g, 'plus' ).replace( /#/g, 'sharp' ).toLowerCase();
+    }
+
+    function toogleActive(type) {
+        var active = document.querySelector('[data-active]');
+        if (active) {
+            active.removeAttribute('data-active');
+        }
+        var active = document.querySelector('[data-id="' + type + '"]');
+        if (active) {
+            active.setAttribute('data-active', '');
+        }
+        document.querySelector('.kl_subtitle').innerHTML = active ? active.innerHTML : '';
+    }
+
     /**
      * 加载数据
      * @param {*} obj 
      * @returns 
      */
     function loadData( type ) {
-        type = type && type.replace( /\s+/g, '' ).replace( /\+/g, 'plus' ).replace( /#/g, 'sharp' ).toLowerCase();
+        type = covertName(type);
         if ( !type ) {
             return;
         }
@@ -18,6 +34,7 @@
             loadMap( type );
             return;
         }
+        toogleActive(type);
         DATA[ type ] = {};
         ajax( 'data/' + type + '/node.json', function ( nodestr ) {
             DATA[ type ].nodestr = nodestr;
@@ -208,10 +225,13 @@
     /**
      * 初始化类别按钮的点击选择事件
      */
-    var buttons = document.getElementById( 'buttons' );
+    var buttons = document.querySelector( '.kl_spread' );
     buttons.addEventListener( 'click', function ( e ) {
-        var dom = e.target || {};
-        loadData( dom.innerText || dom.textContent );
+        /** @type HTMLDivElement */
+        var dom = e.target;
+        if (dom) {
+            loadData( dom.innerText || dom.textContent );
+        }
     } );
 
     /**
@@ -221,7 +241,7 @@
         var content = '';
         list.split( '\n' ).forEach( function ( name ) {
             if ( name ) {
-                content += '<button>' + name + '</button>'
+                content += '<button data-id="' + covertName(name) + '">' + name + '</button>'
             }
         } );
         buttons.innerHTML = content;
